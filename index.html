@@ -1,20 +1,254 @@
-<html>
-<body>
-
-<div class='header'><h1>Home</h1></div>
-<div class='search-view'>
-<input class='search-key' type="text"/>
-<ul class='employee-list'></ul>
-</div>
-
-<script src="lib/jquery-1.8.2.min.js"></script>
-<script src="js/storage/memory-store.js"></script>
+<!DOCTYPE html>
 <!--
-<script src="js/storage/ls-store.js"></script>
-<script src="js/storage/websql-store.js"></script>
--->
-<script src="js/main.js"></script>
-<script src="phonegap.js"></script>
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
 
-</body>
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+<!--        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>-->
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="js/iscroll.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.iscrollview.js"></script>
+        <script type="text/javascript" src="js/jquery.base64.js"></script>
+        
+        <title>Tx Companion App</title>
+    </head>
+    <body>
+        
+        <!--base screen....//    -->
+        <div data-role="page" class="cBaseView">
+            <div data-role='content' class="example-wrapper" data-iscroll>
+                </br>
+                <p style="text-align:center; "><img src="img/logo.png" ></p>
+                <p style="text-align:center; font-size:25px;">Please Sign In</p>
+                
+                <div class="EmailView">
+                    <input type="text" name="Email" data-wrapper-class="ui-custom" id="EmailField" value="vinay.sharma2@wincere.com" placeholder="Email" data-clear-btn="true"/>
+                    <hr style='color:black; width:95%; padding:0px 5px 0px 5px;'/>
+                    <input type="text" name="Password" data-wrapper-class="ui-custom" id="PasswordField" value="123456" placeholder="Password" data-clear-btn="true"/>
+                </div>
+                <p style="margin-left:5%; margin-right:5%; font-size:14px;"><a onclick="app.alertView();" id='T&C' ><img   src='img/checkBox.png' height="22px" top="30px"></a>Yes, I agree to the terms of use of TxDesigner</p>            
+                <a id='SignInButton' data-role="button" data-theme="a" data-transition="slide" >Sign In</a>
+                </br>
+            </div>
+        </div> 
+        
+        
+            <!--Dashboard screen....-->
+        <div data-role="page" class="cBaseView" id="jDashboardPage">
+                <div data-role='content' class="example-wrapper" data-iscroll>
+                    <img class="logoImageView"  src='img/logo.png'>
+                    <a id='logoutButton' class='logoutButton'>
+                        <img src="img/logout.png"/>
+                    </a>
+                    <div class="ThumbnailView">
+                            <img id="Thumbnail" src='img/logo.png'/>
+                    </div>
+                    <div  class="welcomeLabel">
+                        <h2>Welcome <span id="welcomeLabel" style="color: #aa77cc;">John</span></h2>
+                    </div>
+                    <div  class="DashboardViewButtons">
+                        <a id='studyButton' href="#jNotificationPage" transition="slide">
+                            <img src="img/notification.png"/>
+                            <h2>Study</h2>
+                        </a>
+                    </div>   
+                    </br>
+                    <div  class="DashboardViewButtons">
+                        <a id='taskButton' href="#jNotificationPage" transition="slide">
+                            <img src="img/notification.png"/>
+                            <h2>Task</h2>
+                        </a>
+                    </div>   
+                    </br>
+                    <div  class="DashboardViewButtons">
+                        <a id='notificationButton' href="#jNotificationPage" transition="slide">
+                            <img src="img/notification.png"/>
+                            <h2>Notification</h2>
+                        </a>
+                    </div> 
+                    </br>
+                </div>
+        </div>
+        
+         <!--Notification screen....-->
+        <div data-role="page" id="jNotificationPage">
+            
+            <div data-role="header" data-position="fixed" style=" background-color:white;">
+                <div>
+                        <a id='backButton' class="backButton"><img src="img/back.png"/></a>
+                        <p style="text-align:center;">Notification</p>            
+                        <a class='optionButton'>
+                            <img src="img/list.png"/>    
+                        </a>
+                        <a class='searchButton'>
+                            <img src="img/search.png"/>    
+                        </a>
+                </div>
+            </div>
+            
+            <div data-role="footer" style="background-color:rgb(0,185,235);">
+                    <div data-role="navbar" >
+                        <ul >
+                            <li><a href="#" style="background-color:transparent;">
+                                <img src="img/edit.png"/>
+                            </a></li>
+                            <li><a href="#" style="background-color:transparent;">
+                                <img src="img/add.png"/>
+                            </a></li>
+                            <li><a href="#" style="background-color:transparent;">
+                                <img src="img/remove.png"/>
+                            </a></li>
+                             <li><a href="#" style="background-color:transparent;">
+                                <img src="img/save.png"/>
+                            </a></li>
+                             <li><a href="#" style="background-color:transparent;">
+                                <img src="img/info.png"/>
+                            </a></li>
+                        </ul>
+                    </div>
+                 </div>
+            
+             <div data-role='content' class="example-wrapper" data-iscroll>
+             <ul>
+                     <li id= "liStudyListTable">
+                       
+                           
+                        
+                            
+<!--
+                            <tr>
+                                <div>
+                                    <div>
+                                        <span class='left'><img src="img/studyIcon.png"/></span>
+                                        <span  style="font-size:30px;">TX Study name</span>
+                                        <span class='right'><img src="img/details.png"/></span>
+                                    </div>
+                                    </br>
+                                    <div><span id='userName' style="color: rgb(0,185,235);">john</span> has assigned the study <span id='studyName' style="color: rgb(0,185,235);">study name</span> to you. Please start programming.</div>
+                                    <div>
+                                        <span class='left'>time stamp</span> 
+                                        <span class='right'>
+                                                <a class='optionButton1'><img src="img/logout.png"/></a>
+                                                <a class='optionButton2'><img src="img/logout.png"/></a>
+                                                <a class='optionButton3'><img src="img/logout.png"/></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </tr>
+                            <hr style='color:black; width:95%; padding:0px 5px 0px 5px;'/>
+                            <tr>
+                                <div>
+                                    <div>
+                                        <span class='left'><img src="img/studyIcon.png"/></span>
+                                        <span  style="font-size:30px;">TX Study name</span>
+                                        <span class='right'><img src="img/details.png"/></span>
+                                    </div>
+                                    </br>
+                                    <div><span id='userName' style="color: rgb(0,185,235);">john</span> has assigned the study <span id='studyName' style="color: rgb(0,185,235);">study name</span> to you. Please start programming.</div>
+                                    <div>
+                                        <span class='left'>time stamp</span> 
+                                        <span class='right'>
+                                                <a class='optionButton1'><img src="img/logout.png"/></a>
+                                                <a class='optionButton2'><img src="img/logout.png"/></a>
+                                                <a class='optionButton3'><img src="img/logout.png"/></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </tr>
+                            <hr style='color:black; width:95%; padding:0px 5px 0px 5px;'/>
+-->
+                        
+                    </li>
+                </ul> 
+
+                </div>
+                        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+                                <div data-role="navbar">
+                                    <ul>
+                                        <li><a href="#">
+                                            <img src="img/notificationTab.png"/>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <img src="img/userTab.png"/>
+                                        </a></li>
+                                        <li><a href="#">
+                                            <img src="img/studyTab.png"/>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                        </div>
+                </div>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+            
+            $(document).ready(function(){
+              $("#SignInButton").click(function()
+               {
+                    app.loginConnection(); 
+//                    alert("hi");
+               });
+                
+               $("#logoutButton").click(function()
+               {
+//                    alert("logout!");
+                   $.mobile.back();
+               }); 
+                
+                 $("#backButton").click(function()
+               {
+//                    alert("back!");
+                   $.mobile.back();
+               });
+                
+                $("#studyButton").click(function()
+               {
+                    alert("studyButton");
+               }); 
+                
+                 $("#taskButton").click(function()
+               {
+                    alert("taskButton");
+               }); 
+                
+                 $("#notificationButton").click(function()
+               {
+//                    alert("notificationButton");
+                    StudyDataModel.getStudyList();
+               }); 
+                
+              });
+            
+        </script>
+    </body>
 </html>
